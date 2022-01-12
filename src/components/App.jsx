@@ -6,23 +6,24 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      songs: [],
+      songs: []
     };
   }
 
   componentDidMount() {
     axios
-      .get("http://www.devcodecampmusiclibrary.com/api/music")
-      .then((response) =>
-        this.setState({
-          songs: response.data,
+      .get("http://www.devcodecampmusiclibrary.com/api/music") 
+        .then((response) => this.setState({
+          songs: response.data
         })
       );
   }
 
   render() {
     return (
-      <h1>{this.state.songs.length > 0 ? this.state.songs[0].title : null}</h1>
+      <ul>
+        {this.state.songs.length > 0 ? this.state.songs.map((song) => <li>{song.title}, {song.album}, {song.artist}, {song.genre}, {song.releaseDate}</li>): null}
+      </ul>
     );
   }
 }
