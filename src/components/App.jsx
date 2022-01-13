@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
-import MusicTable from "./MusicTable";
+import MusicTable from "./MusicTable/MusicTable";
+import SearchBar from "./SearchBar/SearchBar";
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class App extends Component {
     return (
         <div>
             {this.state.songs.length > 0 ? <MusicTable music={this.state.songs} /> :null}   
+            <SearchBar/>
         </div>
         )
   }
