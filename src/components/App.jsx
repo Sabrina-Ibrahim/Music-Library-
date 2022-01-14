@@ -9,8 +9,20 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            songs: []
+            songs: [],
+            search: ""
         };
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(this.state.song)
     }
 
     componentDidMount() {
@@ -24,11 +36,18 @@ class App extends Component {
 
     render() {
         return (
-            <div>
-                <SearchBar />
-                <NavigationBar />
-                {this.state.songs.length > 0 ? <MusicTable music={this.state.songs} /> : null}
-            </div>
+            <>
+                <form onSubmit={(event) => this.handleSubmit(event)}>
+                    {/* <lable>Song</lable> */}
+                    <input name="search" type="text" onChange={this.handleChange} value={this.state.search} />
+                    <button className="searchMusic" type="submit">Search</button></form>
+
+                <div>
+                    {/* <SearchBar /> */}
+                    <NavigationBar />
+                    {this.state.songs.length > 0 ? <MusicTable music={this.state.songs} search={this.state.search} /> : null}
+                </div>
+            </>
         )
     }
 }
